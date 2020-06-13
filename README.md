@@ -17,4 +17,16 @@ After placing the model in repective directory start the Flask server using
 
 Change the IP address to point to your webserver
 
+To get predicitons from shell instead of browser
+
+```console
+$fileName='cat.png'        
+$bytes = [IO.File]::ReadAllBytes($fileName)
+$base64Image = [Convert]::ToBase64String($bytes)
+$message = @{ image = $base64Image }
+$jsonified = ConvertTo-Json $message
+$response = Invoke-RestMethod -Method Post -Url "http://0.0.0.4:5000/predict" -Body $jsonified
+$response.prediction | format-list
+```
+
 Credits : This was build using tutorials from this [DeepLizard Course](https://deeplizard.com/learn/playlist/PLZbbT5o_s2xrwRnXk_yCPtnqqo4_u2YGL)
