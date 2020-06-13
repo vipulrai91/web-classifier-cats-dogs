@@ -25,7 +25,7 @@ $bytes = [IO.File]::ReadAllBytes($fileName)
 $base64Image = [Convert]::ToBase64String($bytes)
 $message = @{ image = $base64Image }
 $jsonified = ConvertTo-Json $message
-$response = Invoke-RestMethod -Method Post -Url "http://0.0.0.4:5000/predict" -Body $jsonified
+$response = Invoke-RestMethod -Method Post -Url "http://0.0.0.0:5000/predict" -Body $jsonified
 $response.prediction | format-list
 ```
 
